@@ -1,23 +1,25 @@
 package com.mtumminia.financetracker;
 
+import com.mtumminia.financetracker.model.Transaction;
+import com.mtumminia.financetracker.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/transactions")
-public class controller {
+public class TransactionController {
+
     @Autowired
-    private service transactionService;
+    private TransactionService transactionService;
 
     @GetMapping("/{userId}")
-    public List<model.Transaction> getTransactions(@PathVariable Long userId) {
+    public List<Transaction> getTransactions(@PathVariable Long userId) {
         return transactionService.getTransactionsForUser(userId);
     }
 
     @PostMapping
-    public model.Transaction createTransaction(@RequestBody model.Transaction t) {
+    public Transaction createTransaction(@RequestBody Transaction t) {
         return transactionService.addTransaction(t);
     }
 }
